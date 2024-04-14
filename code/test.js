@@ -39,7 +39,7 @@ async function fillOutForm() {
         console.log(columnValues);
 
         // Iterate through each cell in the column and fill out the form fields
-        for (let rowNum = 2; rowNum <= 5; rowNum++) {
+        for (let rowNum = 2; rowNum <= columnValues.length + 1; rowNum++) {
             const misparIshi = columnValues[rowNum - 2]; // Adjusted to use zero-based index
             // Fill out the form fields
             await driver.findElement(By.css('[fieldid="fld_fname"]')).sendKeys('א');
@@ -52,20 +52,21 @@ async function fillOutForm() {
             // Submit the form
             await driver.findElement(By.id('finishForm')).click();
 
-            // Wait for element with class 'summaryPage' and CSS property 'z-index: 0'
-await driver.wait(async () => {
-    const elements = await driver.findElements(By.css('.summaryPage'));
-    for (const element of elements) {
-        const zIndex = await element.getCssValue('z-index');
-        if (zIndex === '0') {
-            return true; // Element found with the required z-index property
-        }
-    }
-    return false; // Element not found with the required z-index property
-});
-
-// Refresh the page
-await driver.navigate().refresh();
+            await driver.wait(async () => {
+                const elements = await driver.findElements(By.css('.summaryPage'));
+                for (const element of elements) {
+                    const display = await element.getCssValue('display');
+                    if (display === 'block') {
+                        // Element found with display: block property
+                        return true;
+                    }
+                }
+                return false; // Element not found with display: block property
+            });
+            
+            // Refresh the page
+            await driver.navigate().refresh();
+            
 
 
             console.log(`Form submitted for row ${rowNum - 1}`);
