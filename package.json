@@ -1,0 +1,23 @@
+{
+  "name": "nerzer2024v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eluif4/nerzer2024v2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eluif4/nerzer2024v2/issues"
+  },
+  "homepage": "https://github.com/eluif4/nerzer2024v2#readme",
+  "dependencies": {
+    "selenium-webdriver": "^4.19.0",
+    "xlsx": "^0.18.5"
+  }
+}
